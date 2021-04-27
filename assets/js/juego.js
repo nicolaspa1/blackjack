@@ -22,8 +22,8 @@
       puntosJugadores.push(0);
     }
     console.clear();
-    puntosHTML.forEach(elem => elem.innerText=0);
-    divCartasJugadores.forEach(elem => elem.innerHTML="");
+    puntosHTML.forEach((elem) => (elem.innerText = 0));
+    divCartasJugadores.forEach((elem) => (elem.innerHTML = ""));
     btnPedir.disabled = false;
     btnDetener.disabled = false;
   };
@@ -63,6 +63,7 @@
   const acumularPuntos = (carta, turno) => {
     puntosJugadores[turno] += valorCarta(carta);
     puntosHTML[turno].innerText = puntosJugadores[turno];
+    puntosJugadores.forEach((el) => console.log(el));
     return puntosJugadores[turno];
   };
 
@@ -74,25 +75,26 @@
     divCartasJugadores[turno].append(imgCarta);
   };
 
-  const determinarGanador = ()=>{
-      const [puntosMinimos,puntosComputadora] = puntosJugadores;
+  const determinarGanador = () => {
+    const [puntosMinimos, puntosComputadora] = puntosJugadores;
     setTimeout(() => {
-        if (puntosMinimos === puntosComputadora) {
-          alert("Nadie ha ganado");
-        } else if (puntosMinimos > 21) {
-          alert("Perdiste");
-        } else if (puntosComputadora > 21) {
-          alert("Felicidades! haz ganado");
-        } else {
-          alert("Perdiste");
-        }
-      }, 30);
-  }
+      if (puntosMinimos === puntosComputadora) {
+        alert("Nadie ha ganado");
+      } else if (puntosMinimos > 21) {
+        alert("Perdiste");
+      } else if (puntosComputadora > 21) {
+        alert("Felicidades! haz ganado");
+      } else {
+        alert("Perdiste");
+      }
+    }, 30);
+  };
   //Turno Computadora
   const turnoComputadora = (puntosMinimos) => {
-    const carta = pedirCarta();
-    let puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
+      let puntosComputadora = 0;
     do {
+      const carta = pedirCarta();
+      puntosComputadora = acumularPuntos(carta, puntosJugadores.length - 1);
       if (puntosComputadora == 21) {
         break;
       }
